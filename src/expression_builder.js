@@ -21,7 +21,10 @@ module.exports = function expression_builder(formula, opts) {
     var xlsx_raw_Fx = opts.xlsx_raw_Fx || {};
 
     var root_exp;
-    var str_formula = formula.cell.f;
+    var str_formula = formula.cell.f.replace(/\-\s?\+/g, '- ');
+    str_formula = str_formula.replace(/\-\s?\-/g, '+ ');
+    str_formula = str_formula.replace(/\+\s?\+/g, '+ ');
+    str_formula = str_formula.replace(/\+\s?\-/g, '- ');
     if (str_formula[0] == '=') {
         str_formula = str_formula.substr(1);
     }

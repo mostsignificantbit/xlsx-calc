@@ -275,6 +275,31 @@ describe('XLSX_CALC', function() {
             XLSX_CALC(workbook);
             assert.equal(workbook.Sheets.Sheet1.A1.v, 3);
         });
+        it('should cope with superflous operators, should calc FUNC(4)- +1, e.g. FUNC == SQRT', function() {
+            workbook.Sheets.Sheet1.A1.f = 'SQRT(4)- +1';
+            XLSX_CALC(workbook);
+            assert.equal(workbook.Sheets.Sheet1.A1.v, 1);
+        });
+        it('should cope with superflous operators, should calc FUNC(4)+ -1, e.g. FUNC == SQRT', function() {
+            workbook.Sheets.Sheet1.A1.f = 'SQRT(4)+ -1';
+            XLSX_CALC(workbook);
+            assert.equal(workbook.Sheets.Sheet1.A1.v, 1);
+        });
+        it('should cope with superflous operators, should calc FUNC(4)+ +1, e.g. FUNC == SQRT', function() {
+            workbook.Sheets.Sheet1.A1.f = 'SQRT(4)+ +1';
+            XLSX_CALC(workbook);
+            assert.equal(workbook.Sheets.Sheet1.A1.v, 3);
+        });
+        it('should cope with superflous operators, should calc FUNC(4)++1, e.g. FUNC == SQRT', function() {
+            workbook.Sheets.Sheet1.A1.f = 'SQRT(4)++1';
+            XLSX_CALC(workbook);
+            assert.equal(workbook.Sheets.Sheet1.A1.v, 3);
+        });
+        it('should cope with superflous operators, should calc FUNC(4)- -1, e.g. FUNC == SQRT', function() {
+            workbook.Sheets.Sheet1.A1.f = 'SQRT(4)- -1';
+            XLSX_CALC(workbook);
+            assert.equal(workbook.Sheets.Sheet1.A1.v, 3);
+        });
     });
     describe('SUM', function() {
         it('makes the sum', function() {
