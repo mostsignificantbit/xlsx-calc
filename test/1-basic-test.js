@@ -255,13 +255,23 @@ describe('XLSX_CALC', function() {
             XLSX_CALC(workbook);
             assert.equal(workbook.Sheets.Sheet1.A1.v, 40);
         });
-        it('should calc 1 + FUNC(4), e.g. FUNC == SQRT', function() {
+        it('should cope with spaces, calc 1 + FUNC(4), e.g. FUNC == SQRT', function() {
             workbook.Sheets.Sheet1.A1.f = '1 + SQRT(4)';
             XLSX_CALC(workbook);
             assert.equal(workbook.Sheets.Sheet1.A1.v, 3);
         });
-        it('should calc FUNC(4) + 1, e.g. FUNC == SQRT', function() {
+        it('should cope with spaces, should calc FUNC(4) + 1, e.g. FUNC == SQRT', function() {
             workbook.Sheets.Sheet1.A1.f = 'SQRT(4) + 1';
+            XLSX_CALC(workbook);
+            assert.equal(workbook.Sheets.Sheet1.A1.v, 3);
+        });
+        it('should cope with spaces, should calc FUNC(4)+ 1, e.g. FUNC == SQRT', function() {
+            workbook.Sheets.Sheet1.A1.f = 'SQRT(4)+ 1';
+            XLSX_CALC(workbook);
+            assert.equal(workbook.Sheets.Sheet1.A1.v, 3);
+        });
+        it('should cope with spaces, should calc FUNC(4) +1, e.g. FUNC == SQRT', function() {
+            workbook.Sheets.Sheet1.A1.f = 'SQRT(4) +1';
             XLSX_CALC(workbook);
             assert.equal(workbook.Sheets.Sheet1.A1.v, 3);
         });

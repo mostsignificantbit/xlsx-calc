@@ -120,11 +120,14 @@ module.exports = function expression_builder(formula, opts) {
             fn_stack[fn_stack.length - 1].special.push(fn_stack[fn_stack.length - 1].exp);
             fn_stack[fn_stack.length - 1].exp = exp_obj = new Exp(formula);
             buffer = '';
-        } else {
+        } else if(char === ' ') {
+            // do nothing
+        }
+        else {
             buffer += char;
         }
     }
-    
+
     var state = start;
 
     for (var i = 0; i < str_formula.length; i++) {
