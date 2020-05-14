@@ -48,6 +48,7 @@ let formulas = {
     'SUMIF': sumif, // missing test,
     'CHOOSE': choose,
     'SUBSTITUTE': substitute,
+    'INDIRECT': indirect,
 };
 
 function choose(option) {
@@ -830,7 +831,7 @@ function escapeRegExp(str) {
 function substitute(text, old_text, new_text, occurrence) {
     if(occurrence <= 0) {
       throw Error('#VALUE!');
-    }  
+    }
     if (!text || !old_text || (!new_text && new_text !== '')) {
       return text;
     } else if (occurrence === undefined) {
@@ -847,5 +848,12 @@ function substitute(text, old_text, new_text, occurrence) {
       }
     }
   };
+
+function indirect() {
+    if (!arguments || arguments.length === 0) {
+        throw Error('#VALUE!');
+    }
+    return arguments[0];
+};
 
 module.exports = formulas;

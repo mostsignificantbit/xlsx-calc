@@ -35,6 +35,11 @@ describe('XLSX_CALC', function() {
                     C5: {
                         v: 3
                     },
+                },
+                OtherSheet: {
+                    A1: {
+                        v: 'hello indirect'
+                    }
                 }
             }
         };
@@ -1571,6 +1576,14 @@ describe('XLSX_CALC', function() {
             };
             XLSX_CALC(workbook);
             assert.equal(workbook.Sheets.Sheet1.A1.v, "b");
+        });
+    });
+
+    describe('INDIRECT', () => {
+        it.only('should display indirected value', () => {
+            workbook.Sheets.Sheet1.A1.f = 'INDIRECT(OtherSheet!A1)';
+            XLSX_CALC(workbook);
+            assert.equal(workbook.Sheets.Sheet1.A1.v, 'hello indirect');
         });
     });
 
