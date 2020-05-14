@@ -1580,7 +1580,7 @@ describe('XLSX_CALC', function() {
     });
 
     describe('INDIRECT', () => {
-        it.only('should display indirected value', () => {
+        it('should display indirected value', () => {
             workbook.Sheets.Sheet1.A1.f = 'INDIRECT(OtherSheet!A1)';
             XLSX_CALC(workbook);
             assert.equal(workbook.Sheets.Sheet1.A1.v, 'hello indirect');
